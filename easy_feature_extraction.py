@@ -16,6 +16,8 @@ ref_n_src = 12000 * 29
 if keras.__version__[0] != '1':
     raise RuntimeError('Keras version should be 1.x, maybe 1.2.2')
 
+K.set_image_dim_ordering("th")
+
 
 def load_model(mid_idx):
     """Load one model and return it"""
@@ -72,9 +74,9 @@ def predict_cpu(f_path, models, n_jobs):
 def main(txt_path, out_path, n_jobs=1):
     models = [load_model(mid_idx) for mid_idx in range(5)]  # for five models...
     all_features = []
-    with open(txt_path) as f_path:    
+    with open(txt_path) as f_path:
         all_features = predict_cpu(f_path, models, n_jobs)
-    
+
     print('Saving all features at {}..'.format(out_path))
     np.save(out_path, all_features)
     print('Done. Saved a numpy array size of (%d, %d)' % all_features.shape)
