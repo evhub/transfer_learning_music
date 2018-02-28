@@ -1,6 +1,6 @@
 .PHONY: run
 run:
-	python2 ./easy_feature_extraction.py ../song-annotation-db/audio_paths.txt ../song-annotation-db/features.npy
+	python2 ./easy_feature_extraction.py ../song-annotation-db/audio_paths.txt ../song-annotation-db/features.npy 8
 
 .PHONY: launch
 launch:
@@ -10,6 +10,7 @@ launch:
 install: kapre
 	pip install -U pipenv
 	pipenv --two
+	pipenv install h5py
 	pipenv install theano==0.9
 	pipenv install keras==1.2.2
 	pipenv install -e ./kapre
