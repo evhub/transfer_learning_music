@@ -1,3 +1,7 @@
+.PHONY: run
+run:
+	python2 ./easy_feature_extraction.py ../song-annotation-db/audio_paths.txt ../song-annotation-db/features.npy
+
 .PHONY: launch
 launch:
 	pipenv shell
@@ -5,6 +9,7 @@ launch:
 .PHONY: install
 install: kapre
 	pip install -U pipenv
+	pipenv --two
 	pipenv install theano==0.9
 	pipenv install keras==1.2.2
 	pipenv install -e ./kapre
@@ -16,6 +21,6 @@ kapre:
 
 .PHONY: clean
 clean:
-	rm -rf ./dist ./build
+	rm -rf ./dist ./build ./kapre Pipfile Pipfile.lock
 	find . -name '*.pyc' -delete
 	find . -name '__pycache__' -delete
